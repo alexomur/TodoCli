@@ -1,0 +1,19 @@
+Loading project 'C:\Users\Alexomur\Desktop\projects\TodoCli\TodoCliClear\TodoCliClear.csproj'...
+Analyze 'TodoCliClear'
+  Program.cs(20,71): warning SA1000: The keyword 'new' should be followed by a space.
+  Program.cs(9,23): warning SA1600: Elements should be documented
+  Program.cs(11,16): warning SA1600: Elements should be documented
+  Program.cs(13,19): warning SA1600: Elements should be documented
+  Program.cs(15,17): warning SA1600: Elements should be documented
+  Program.cs(18,23): warning SA1600: Elements should be documented
+  Program.cs(28,34): warning SA1600: Elements should be documented
+  Program.cs(41,24): warning SA1600: Elements should be documented
+  Program.cs(48,23): warning SA1600: Elements should be documented
+  Program.cs(1,1): warning SA1633: The file header is missing or not located at the top of the file.
+Analyzed project 'C:\Users\Alexomur\Desktop\projects\TodoCli\TodoCliClear\TodoCliClear.csproj' (in 2,3 s)
+
+ 1 SA1000 Keywords should be spaced correctly
+ 8 SA1600 Elements should be documented
+ 1 SA1633 File should have header
+
+10 diagnostics found

@@ -1,0 +1,38 @@
+Loading project 'C:\Users\Alexomur\Desktop\projects\TodoCli\TodoCliBugs\TodoCliBugs.csproj'...
+Analyze 'TodoCliBugs'
+  Program.cs(119,13): warning CS0219: Переменной "debugNumber" присвоено значение, но оно ни разу не использовано.
+  Program.cs(42,16): warning CS8603: Возможно, возврат ссылки, допускающей значение NULL.
+  Program.cs(119,9): info RCS1118: Mark local variable as const
+  Program.cs(87,37): info RCS1163: Unused parameter 'title'
+  Program.cs(23,71): warning SA1000: The keyword 'new' should be followed by a space.
+  Program.cs(55,55): warning SA1000: The keyword 'new' should be followed by a space.
+  Program.cs(1,1): warning SA1200: Using directive should appear within a namespace declaration
+  Program.cs(2,1): warning SA1200: Using directive should appear within a namespace declaration
+  Program.cs(3,1): warning SA1200: Using directive should appear within a namespace declaration
+  Program.cs(4,1): warning SA1200: Using directive should appear within a namespace declaration
+  Program.cs(5,1): warning SA1200: Using directive should appear within a namespace declaration
+  Program.cs(6,1): warning SA1200: Using directive should appear within a namespace declaration
+  Program.cs(7,1): warning SA1200: Using directive should appear within a namespace declaration
+  Program.cs(12,23): warning SA1300: Element 'todoItem' should begin with an uppercase letter
+  Program.cs(12,23): warning SA1600: Elements should be documented
+  Program.cs(14,16): warning SA1600: Elements should be documented
+  Program.cs(16,19): warning SA1600: Elements should be documented
+  Program.cs(18,17): warning SA1600: Elements should be documented
+  Program.cs(21,23): warning SA1600: Elements should be documented
+  Program.cs(31,34): warning SA1600: Elements should be documented
+  Program.cs(45,24): warning SA1600: Elements should be documented
+  Program.cs(52,23): warning SA1600: Elements should be documented
+  Program.cs(1,1): warning SA1633: The file header is missing or not located at the top of the file.
+Analyzed project 'C:\Users\Alexomur\Desktop\projects\TodoCli\TodoCliBugs\TodoCliBugs.csproj' (in 2,3 s)
+
+ 1 CS0219  Переменная назначена, но ее значение не используется
+ 1 CS8603  Возможно, возврат ссылки, допускающей значение NULL.
+ 1 RCS1118 Mark local variable as const
+ 1 RCS1163 Unused parameter
+ 2 SA1000  Keywords should be spaced correctly
+ 7 SA1200  Using directives should be placed correctly
+ 1 SA1300  Element should begin with upper-case letter
+ 8 SA1600  Elements should be documented
+ 1 SA1633  File should have header
+
+23 diagnostics found

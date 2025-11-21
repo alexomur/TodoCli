@@ -1,0 +1,16 @@
+  Определение проектов для восстановления...
+  Все проекты обновлены для восстановления.
+C:\Users\Alexomur\Desktop\projects\TodoCli\TodoCliClear\Program.cs(1,1): warning SA1633: The file header is missing or not located at the top of the file. (https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1633.md) [C:\Users\Alexomur\Desktop\projects\TodoCli\TodoCliClear\TodoCliClear.csproj]
+C:\Users\Alexomur\Desktop\projects\TodoCli\TodoCliClear\Program.cs(20,71): warning SA1000: The keyword 'new' should be followed by a space. (https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1000.md) [C:\Users\Alexomur\Desktop\projects\TodoCli\TodoCliClear\TodoCliClear.csproj]
+CSC : warning SA0001: XML comment analysis is disabled due to project configuration (https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA0001.md) [C:\Users\Alexomur\Desktop\projects\TodoCli\TodoCliClear\TodoCliClear.csproj]
+  TodoCliClear -> C:\Users\Alexomur\Desktop\projects\TodoCli\TodoCliClear\bin\Debug\net8.0\TodoCliClear.dll
+
+Сборка успешно завершена.
+
+C:\Users\Alexomur\Desktop\projects\TodoCli\TodoCliClear\Program.cs(1,1): warning SA1633: The file header is missing or not located at the top of the file. (https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1633.md) [C:\Users\Alexomur\Desktop\projects\TodoCli\TodoCliClear\TodoCliClear.csproj]
+C:\Users\Alexomur\Desktop\projects\TodoCli\TodoCliClear\Program.cs(20,71): warning SA1000: The keyword 'new' should be followed by a space. (https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1000.md) [C:\Users\Alexomur\Desktop\projects\TodoCli\TodoCliClear\TodoCliClear.csproj]
+CSC : warning SA0001: XML comment analysis is disabled due to project configuration (https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA0001.md) [C:\Users\Alexomur\Desktop\projects\TodoCli\TodoCliClear\TodoCliClear.csproj]
+    Предупреждений: 3
+    Ошибок: 0
+
+Прошло времени 00:00:00.77
