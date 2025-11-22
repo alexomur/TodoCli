@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics; // BUG_FOR_LAB: неиспользуемый using (Roslyn / Roslynator)
+using System.Diagnostics; // BUG_FOR_LAB: неиспользуемый using
 using System.IO;
 using System.Linq;
 using System.Text.Json;
@@ -8,7 +8,7 @@ using System.Threading;
 
 namespace TodoCli;
 
-// BUG_FOR_LAB: имя типа с маленькой буквы (StyleCop SA1300)
+// BUG_FOR_LAB: имя типа с маленькой буквы
 internal sealed class todoItem
 {
     public int Id { get; set; }
@@ -38,7 +38,7 @@ internal static class TodoRepository
         var json = File.ReadAllText(FilePath);
         var items = JsonSerializer.Deserialize<List<todoItem>>(json, SerializerOptions);
 
-        // BUG_FOR_LAB: возможен null, но возвращаем в не-nullable тип (CS8603 / Roslyn).
+        // BUG_FOR_LAB: возможен null, но возвращаем в не-nullable тип
         return items;
     }
 
@@ -51,7 +51,7 @@ internal static class TodoRepository
 
 internal static class Program
 {
-    // BUG_FOR_LAB_MPROF: искусственная «утечка» для динамического анализа
+    // BUG_FOR_LAB: искусственная утечка памяти (объекты накапливаются и не очищаются)
     private static readonly List<byte[]> LeakBucket = new();
 
     private static int Main(string[] args)
@@ -73,7 +73,8 @@ internal static class Program
                 "list" => RunList(),
                 "done" => RunDone(rest),
                 "remove" => RunRemove(rest),
-                "leak-demo" => RunLeakDemo(), // динамический баг
+                "leak-demo" => RunLeakDemo(),
+                "exceptions-demo" => RunExceptionsDemo(),
                 _ => UnknownCommand(command),
             };
         }
@@ -86,18 +87,20 @@ internal static class Program
 
     private static void PrintHeader(string title)
     {
-        // BUG_FOR_LAB: параметр title не используется (Roslynator: RCS* unused parameter)
+        // BUG_FOR_LAB: параметр title не используется
         Console.WriteLine("Todo CLI");
     }
 
     private static void PrintUsage()
     {
         PrintHeader("Todo CLI (менеджер задач)");
-        Console.WriteLine("  add <text>    - добавить задачу");
-        Console.WriteLine("  list          - показать задачи");
-        Console.WriteLine("  done <id>     - отметить выполненной");
-        Console.WriteLine("  remove <id>   - удалить задачу");
-        Console.WriteLine("  leak-demo     - ИСКУССТВЕННАЯ утечка памяти для лабораторной");
+        Console.WriteLine("  add <text>          - добавить задачу");
+        Console.WriteLine("  list                - показать задачи");
+        Console.WriteLine("  done <id>           - отметить выполненной");
+        Console.WriteLine("  remove <id>         - удалить задачу");
+        Console.WriteLine("  leak-demo           - демонстрация утечки памяти");
+        Console.WriteLine("  cpu-demo            - демонстрация высокой нагрузки на CPU");
+        Console.WriteLine("  exceptions-demo     - демонстрация большого числа исключений");
     }
 
     private static int UnknownCommand(string command)
@@ -115,7 +118,7 @@ internal static class Program
             return 1;
         }
 
-        // BUG_FOR_LAB: неиспользуемая локальная переменная (CS0219 / IDE0059 / Roslynator)
+        // BUG_FOR_LAB: неиспользуемая локальная переменная
         int debugNumber = 42;
 
         var text = string.Join(' ', args);
@@ -192,19 +195,68 @@ internal static class Program
 
     private static int RunLeakDemo()
     {
-        Console.WriteLine("Запуск ИСКУССТВЕННОЙ утечки памяти (C#)...");
+        Console.WriteLine("Запуск leak-demo (ИСКУССТВЕННАЯ утечка памяти)...");
 
         for (var i = 0; i < 200; i++)
         {
-            // каждый шаг +1 МБ, не освобождаем
+            // BUG_FOR_LAB: каждый шаг добавляет ещё 1 МБ в глобальное хранилище, без очистки
             LeakBucket.Add(new byte[1024 * 1024]);
             Thread.Sleep(100);
             Console.WriteLine($"Allocated {LeakBucket.Count} MB");
+        }
+
+        // BUG_FOR_LAB: длительный цикл с интенсивными вычислениями без пауз
+        var start = Environment.TickCount64;
+        var durationMs = 10_000L; // около 10 секунд
+
+        double value = 0;
+        while (Environment.TickCount64 - start < durationMs)
+        {
+            for (int i = 0; i < 200_000; i++)
+            {
+                value += Math.Sqrt(i) * Math.Sqrt(i + 1);
+            }
         }
 
         Console.WriteLine("Готово. Процесс всё ещё держит выделенную память.");
         Console.WriteLine("Нажмите Enter для выхода...");
         Console.ReadLine();
         return 0;
+    }
+
+    private static int RunExceptionsDemo()
+    {
+        Console.WriteLine("Запуск exceptions-demo (ИСКУССТВЕННОЕ множество исключений)...");
+
+        // BUG_FOR_LAB: в течение нескольких секунд генерируется и обрабатывается очень много исключений
+        var start = Environment.TickCount64;
+        var durationMs = 5000L;
+        int count = 0;
+
+        while (Environment.TickCount64 - start < durationMs)
+        {
+            try
+            {
+                ThrowSomething(count);
+            }
+            catch (InvalidOperationException)
+            {
+                count++;
+            }
+        }
+
+        Console.WriteLine($"Готово. Сгенерировано и обработано исключений: {count}");
+        Console.WriteLine("Нажмите Enter для выхода...");
+        Console.ReadLine();
+        return 0;
+    }
+
+    private static void ThrowSomething(int n)
+    {
+        // BUG_FOR_LAB: всегда генерируем исключение при вызове
+        if (n >= 0)
+        {
+            throw new InvalidOperationException("Искусственная ошибка для демонстрации.");
+        }
     }
 }
